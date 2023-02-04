@@ -64,6 +64,6 @@ const todo = (titleP, descP, priorityP, dueDateP, notesP) => {
 };
 
 //replace these with a module maybe?
-function createTodo();
+function createTodo() {};
 
-function displayTodo();
+function displayTodo() {};
