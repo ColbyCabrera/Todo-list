@@ -1,5 +1,8 @@
 import './style.css';
-import todo from './todo';
+import {createTodo, todo} from "./todo";
+import { domCache, getFormData } from './domManip';
+
+//https://www.velotio.com/engineering-blog/design-patterns-in-es6
 
 // todo properties
 // title desc, dueDate, priority, notes
@@ -14,4 +17,6 @@ import todo from './todo';
 
 // only show desc and notes when clicked on
 
-let test = todo("title1", "desc1", "high", "someday", "no notes");
+const btn = document.getElementById("submit");
+
+btn.addEventListener('click', createTodo);

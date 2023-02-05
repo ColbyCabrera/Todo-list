@@ -1,6 +1,4 @@
-import cacheDom from "./domManip";
-
-export default todo;
+import { domCache, getFormData, displayTodo } from "./domManip";
 
 const todo = (titleP, descP, priorityP, dueDateP, notesP) => {
   let title = titleP;
@@ -63,7 +61,18 @@ const todo = (titleP, descP, priorityP, dueDateP, notesP) => {
   };
 };
 
-//replace these with a module maybe?
-function createTodo() {};
+const createTodo = () => {
+  const formData = getFormData();
 
-function displayTodo() {};
+  const newTodo = todo(
+    formData.title,
+    formData.desc,
+    "priority",
+    formData.date,
+    "notes"
+  );
+
+  displayTodo(newTodo);
+};
+
+export { todo, createTodo };
