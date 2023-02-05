@@ -7,13 +7,30 @@
     <title>Document</title>
   </head>
   <body>
-
     <div>
-      <h3>Todo title</h3>
+      <form action="#" method="post">
+        <ul>
+          <li>
+            <label for="todo-title">Title</label>
+            <input required type="text" id="todo-title" />
+          </li>
+          <li>
+            <label for="todo-description">Description</label>
 
-      <p>Date</p>
-      <p>Priority</p>
+            <textarea id="todo-description" name="todo-description"></textarea>
+          </li>
+          <li>
+            <label for="todo-date">Date</label>
+            <input type="date" id="todo-date" />
+          </li>
+        </ul>
+        <div class="buttons">
+          <button type="button">Create Todo</button>
+        </div>
+      </form>
     </div>
+
+    <section id="todos"></section>
     <script src="main.js"></script>
   </body>
 </html>
