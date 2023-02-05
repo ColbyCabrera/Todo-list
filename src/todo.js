@@ -1,4 +1,4 @@
-import cacheDom from "./cacheDom";
+import cacheDom from "./domManip";
 
 export default todo;
 
