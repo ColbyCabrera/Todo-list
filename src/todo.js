@@ -74,6 +74,6 @@ function createTodo(event) {
   );
 
   displayTodo(newTodo);
-};
+}
 
 export { todo, createTodo };
