@@ -61,7 +61,8 @@ const todo = (titleP, descP, priorityP, dueDateP, notesP) => {
   };
 };
 
-const createTodo = () => {
+function createTodo(event) {
+  event.preventDefault();
   const formData = getFormData();
 
   const newTodo = todo(
