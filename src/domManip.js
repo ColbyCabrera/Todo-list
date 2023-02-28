@@ -20,6 +20,7 @@ function getFormData() {
 }
 
 function displayTodo(todo) {
+  const todoDiv = document.createElement("div");
   const todoTitle = document.createElement("h3");
   const todoDescription = document.createElement("p");
   const todoDate = document.createElement("p");
@@ -28,9 +29,10 @@ function displayTodo(todo) {
   todoDescription.textContent = todo.getDesc();
   todoDate.textContent = todo.getDueDate();
 
-  domCache.todoContainer.appendChild(todoTitle);
-  domCache.todoContainer.appendChild(todoDescription);
-  domCache.todoContainer.appendChild(todoDate);
+  todoDiv.appendChild(todoTitle);
+  todoDiv.appendChild(todoDescription);
+  todoDiv.appendChild(todoDate);
+  domCache.todoContainer.appendChild(todoDiv);
 }
 
 function displayProject(project) {
