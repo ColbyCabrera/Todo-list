@@ -1,4 +1,5 @@
-import { domCache, getFormData, displayTodo } from "./domManip";
+import { getFormData, displayTodo, displayProject } from "./domManip";
+import { getCurrentProject, project, createProject} from "./project";
 
 const todo = (titleP, descP, priorityP, dueDateP, notesP) => {
   let title = titleP;
@@ -63,6 +64,7 @@ const todo = (titleP, descP, priorityP, dueDateP, notesP) => {
 
 function createTodo(event) {
   event.preventDefault();
+  const currentProject = getCurrentProject();
   const formData = getFormData();
 
   const newTodo = todo(
@@ -72,8 +74,8 @@ function createTodo(event) {
     formData.date,
     "notes"
   );
-
-  displayTodo(newTodo);
+  currentProject.addTodo(newTodo);
+  displayProject(currentProject);
 }
 
 export { todo, createTodo };

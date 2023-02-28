@@ -7,30 +7,60 @@
     <title>Document</title>
   </head>
   <body>
-    <div>
-      <form>
-        <ul>
-          <li>
-            <label for="todo-title">Title</label>
-            <input required type="text" id="todo-title" />
-          </li>
-          <li>
-            <label for="todo-description">Description</label>
+    <div class="sidebar">
+      <div class="forms">
+        <form class="create-project">
+          <ul>
+            <li>
+              <h3>New project</h3>
+            </li>
+            <li>
+              <label for="project-title">Name</label>
+              <input required type="text" id="project-title" />
+            </li>
+          </ul>
+          <div class="buttons">
+            <button type="submit" id="project-submit">Create Project</button>
+          </div>
+        </form>
 
-            <textarea id="todo-description" name="todo-description"></textarea>
-          </li>
-          <li>
-            <label for="todo-date">Date</label>
-            <input type="date" id="todo-date" />
-          </li>
-        </ul>
-        <div class="buttons">
-          <button type="submit" id="submit">Create Todo</button>
-        </div>
-      </form>
+        <form class="create-todo">
+          <ul>
+            <li>
+              <h3>New todo</h3>
+            </li>
+            <li>
+              <label for="todo-title">Title</label>
+              <input required type="text" id="todo-title" />
+            </li>
+            <li>
+              <label for="todo-description">Description</label>
+
+              <textarea
+                id="todo-description"
+                name="todo-description"
+              ></textarea>
+            </li>
+            <li>
+              <label for="todo-date">Date</label>
+              <input type="date" id="todo-date" />
+            </li>
+          </ul>
+          <div class="buttons">
+            <button type="submit" id="todo-submit">Create Todo</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="projects" id="projects">
+      </div>
     </div>
 
-    <section id="todos"></section>
+    <section>
+      <h2 id="current-project">Todos</h2>
+      <div id="todos"></div>
+    </section>
+
     <script src="main.js"></script>
   </body>
 </html>
