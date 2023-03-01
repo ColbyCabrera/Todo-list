@@ -1,5 +1,5 @@
-import { getFormData, displayTodo, displayProject } from "./domManip";
-import { getCurrentProject, project, createProject } from "./project";
+import { getFormData, displayProject } from "./domManip";
+import { getCurrentProject } from "./project";
 
 const todo = (titleP, descP, priorityP, dueDateP, notesP) => {
   let title = titleP;

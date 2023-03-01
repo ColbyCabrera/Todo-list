@@ -1,5 +1,5 @@
-export { domCache, getFormData, displayTodo, displayProject, displayProjectList };
-import { project, getProjectList } from "./project";
+export { domCache, getFormData, displayTodo, displayProject, displayProjectList, init };
+import { getProjectList, selectProject, createDefaultProject } from "./project";
 
 const domCache = {
   todoTitle: document.getElementById("todo-title"),
@@ -44,12 +44,22 @@ function displayProject(project) {
   });
 }
 
-function displayProjectList(projectList) {
+function displayProjectList() {
+  const projectList = getProjectList();
   domCache.projectContainer.innerHTML = "";
-  projectList.forEach((project) => {
+  projectList.forEach((project, index) => {
     const projectName = document.createElement('h3');
+    projectName.id = index;
     projectName.textContent = project.getProjectName();
+    projectName.addEventListener('click', selectProject);
     domCache.projectContainer.appendChild(projectName);
   });
-  console.log(projectList);
+}
+
+function init() {
+  createDefaultProject();
+  const projects = getProjectList();
+  displayProject(projects[0]);
+
+  displayProjectList();
 }
