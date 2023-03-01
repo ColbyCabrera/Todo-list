@@ -1,11 +1,14 @@
 import { getFormData, displayProject } from "./domManip";
 import { getCurrentProject } from "./project";
-
+// Priority will be binary if high priority display red dot else display nothing
+// add id to todos and ability to remove todo from project list
+// add delete project functionality, update ids when project is deleted
+// add ability to edit todos
 const todo = (titleP, descP, priorityP, dueDateP, notesP) => {
   let title = titleP;
   let desc = descP;
   let priority = priorityP;
-  let dueDate = dueDateP;
+  let dueDate = new Date(dueDateP.split("-")); // fixes date being behind 1 day
   let notes = notesP;
 
   const getTitle = () => {

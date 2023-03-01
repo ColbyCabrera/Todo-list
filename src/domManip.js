@@ -1,5 +1,13 @@
-export { domCache, getFormData, displayTodo, displayProject, displayProjectList, init };
+export {
+  domCache,
+  getFormData,
+  displayTodo,
+  displayProject,
+  displayProjectList,
+  init,
+};
 import { getProjectList, selectProject, createDefaultProject } from "./project";
+import format from "date-fns/format";
 
 const domCache = {
   todoTitle: document.getElementById("todo-title"),
@@ -15,11 +23,14 @@ function getFormData() {
   const title = domCache.todoTitle.value;
   const desc = domCache.todoDescription.value;
   const date = domCache.todoDate.value;
+  console.log(date);
   const projectName = domCache.projectName.value;
   return { title, date, desc, projectName };
 }
 
 function displayTodo(todo) {
+  const date = todo.getDueDate();
+  console.log(date);
   const todoDiv = document.createElement("div");
   const todoTitle = document.createElement("h3");
   const todoDescription = document.createElement("p");
@@ -27,7 +38,7 @@ function displayTodo(todo) {
 
   todoTitle.textContent = todo.getTitle();
   todoDescription.textContent = todo.getDesc();
-  todoDate.textContent = todo.getDueDate();
+  todoDate.textContent = format(date, "MMMM do, yyyy");
 
   todoDiv.appendChild(todoTitle);
   todoDiv.appendChild(todoDescription);
@@ -37,9 +48,9 @@ function displayTodo(todo) {
 
 function displayProject(project) {
   domCache.currentProject.textContent = project.getProjectName();
-  domCache.todoContainer.innerHTML = ""
+  domCache.todoContainer.innerHTML = "";
 
-  project.getTodos().forEach(todo => {
+  project.getTodos().forEach((todo) => {
     displayTodo(todo);
   });
 }
@@ -48,10 +59,10 @@ function displayProjectList() {
   const projectList = getProjectList();
   domCache.projectContainer.innerHTML = "";
   projectList.forEach((project, index) => {
-    const projectName = document.createElement('h3');
+    const projectName = document.createElement("h3");
     projectName.id = index;
     projectName.textContent = project.getProjectName();
-    projectName.addEventListener('click', selectProject);
+    projectName.addEventListener("click", selectProject);
     domCache.projectContainer.appendChild(projectName);
   });
 }
