@@ -10,12 +10,12 @@ const project = (projectName) => {
 
   const getTodos = () => {
     return todos;
-  }
+  };
 
   const getProjectName = () => {
     return name;
-  }
-  
+  };
+
   return { addTodo, getProjectName, getTodos };
 };
 
@@ -24,11 +24,11 @@ const defaultProject = project("Todos");
 let currentProject = defaultProject;
 
 function addProjectToList(project) {
-    projectList.push(project);
+  projectList.push(project);
 }
 
 function getProjectList() {
-    return projectList;
+  return projectList;
 }
 
 function getCurrentProject() {
@@ -40,15 +40,18 @@ function setCurrentProject(project) {
 }
 
 function createProject(event) {
-    event.preventDefault();
-  
-    const formData = getFormData();
+  event.preventDefault();
+
+  const formData = getFormData();
+  if (formData.projectName != "") {
     const newProject = project(formData.projectName);
-  
     addProjectToList(newProject);
     setCurrentProject(newProject);
     displayProject(newProject);
     displayProjectList(getProjectList());
+  } else {
+    alert("Project name is required");
   }
+}
 
 export { project, createProject, getCurrentProject, setCurrentProject };

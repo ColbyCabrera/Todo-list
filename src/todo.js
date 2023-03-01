@@ -1,5 +1,5 @@
 import { getFormData, displayTodo, displayProject } from "./domManip";
-import { getCurrentProject, project, createProject} from "./project";
+import { getCurrentProject, project, createProject } from "./project";
 
 const todo = (titleP, descP, priorityP, dueDateP, notesP) => {
   let title = titleP;
@@ -67,15 +67,19 @@ function createTodo(event) {
   const currentProject = getCurrentProject();
   const formData = getFormData();
 
-  const newTodo = todo(
-    formData.title,
-    formData.desc,
-    "priority",
-    formData.date,
-    "notes"
-  );
-  currentProject.addTodo(newTodo);
-  displayProject(currentProject);
+  if (formData.title != "") {
+    const newTodo = todo(
+      formData.title,
+      formData.desc,
+      "priority",
+      formData.date,
+      "notes"
+    );
+    currentProject.addTodo(newTodo);
+    displayProject(currentProject);
+  } else {
+    alert("Title is required");
+  }
 }
 
 export { todo, createTodo };
