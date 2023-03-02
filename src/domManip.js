@@ -7,8 +7,8 @@ export {
   init,
 };
 import { getProjectList, selectProject, createDefaultProject } from "./project";
+import { changePriority, todo } from "./todo";
 import format from "date-fns/format";
-import { isDate } from "date-fns";
 
 const domCache = {
   todoTitle: document.getElementById("todo-title"),
@@ -38,10 +38,17 @@ function displayTodo(todo) {
 
   todoTitle.textContent = todo.getTitle();
   todoDescription.textContent = todo.getDesc();
-  todoPriority.class = "priority";
+  todoPriority.classList.add("priority");
+  todoPriority.addEventListener('click', changePriority);
 
   if (date != null) {
     todoDate.textContent = format(date, "MMMM do, yyyy");
+  }
+
+  if (todo.getPriority() === "high") {
+    todoPriority.style.backgroundColor = "red";
+  } else {
+    todoPriority.style.backgroundColor = "#ddd"
   }
 
   todoDiv.appendChild(todoTitle);
@@ -76,6 +83,5 @@ function init() {
   createDefaultProject();
   const projects = getProjectList();
   displayProject(projects[0]);
-
   displayProjectList();
 }

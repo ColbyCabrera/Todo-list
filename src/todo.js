@@ -1,3 +1,4 @@
+import { el } from "date-fns/locale";
 import { getFormData, displayProject } from "./domManip";
 import { getCurrentProject } from "./project";
 // Priority will be binary if high priority display red dot else display nothing
@@ -91,4 +92,20 @@ function createTodo(event) {
   }
 }
 
-export { todo, createTodo };
+function changePriority(e) {
+  const target = e.target;
+  const todoElements = Array.from(target.parentNode.parentNode.children);
+  const index = todoElements.indexOf(target.parentNode);
+  const todoList = getCurrentProject().getTodos();
+  const todo = todoList[index];
+
+  if (todo.getPriority() === "high") {
+    todo.setPriority("low");
+    target.style.backgroundColor = "#ddd";
+  } else {
+    todo.setPriority("high");
+    target.style.backgroundColor = "red";
+  }
+}
+
+export { todo, createTodo, changePriority };
