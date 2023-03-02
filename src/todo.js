@@ -8,7 +8,7 @@ const todo = (titleP, descP, priorityP, dueDateP, notesP) => {
   let title = titleP;
   let desc = descP;
   let priority = priorityP;
-  let dueDate = new Date(dueDateP.split("-")); // fixes date being behind 1 day
+  let dueDate;
   let notes = notesP;
 
   const getTitle = () => {
@@ -40,7 +40,11 @@ const todo = (titleP, descP, priorityP, dueDateP, notesP) => {
   };
 
   const setdueDate = (newDueDate) => {
-    dueDate = newDueDate;
+    if (newDueDate != "") {
+      dueDate = new Date(newDueDate.split("-")); // fixes date being behind 1 day
+    } else {
+      dueDate = null;
+    }
   };
 
   const getNotes = () => {
@@ -50,6 +54,8 @@ const todo = (titleP, descP, priorityP, dueDateP, notesP) => {
   const setNotes = (newnotes) => {
     notes = newnotes;
   };
+
+  setdueDate(dueDateP); // set due date
 
   return {
     getTitle,
@@ -74,7 +80,7 @@ function createTodo(event) {
     const newTodo = todo(
       formData.title,
       formData.desc,
-      "priority",
+      "low",
       formData.date,
       "notes"
     );

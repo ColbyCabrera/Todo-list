@@ -8,6 +8,7 @@ export {
 };
 import { getProjectList, selectProject, createDefaultProject } from "./project";
 import format from "date-fns/format";
+import { isDate } from "date-fns";
 
 const domCache = {
   todoTitle: document.getElementById("todo-title"),
@@ -23,26 +24,30 @@ function getFormData() {
   const title = domCache.todoTitle.value;
   const desc = domCache.todoDescription.value;
   const date = domCache.todoDate.value;
-  console.log(date);
   const projectName = domCache.projectName.value;
   return { title, date, desc, projectName };
 }
 
 function displayTodo(todo) {
   const date = todo.getDueDate();
-  console.log(date);
   const todoDiv = document.createElement("div");
   const todoTitle = document.createElement("h3");
   const todoDescription = document.createElement("p");
   const todoDate = document.createElement("p");
+  const todoPriority = document.createElement("div");
 
   todoTitle.textContent = todo.getTitle();
   todoDescription.textContent = todo.getDesc();
-  todoDate.textContent = format(date, "MMMM do, yyyy");
+  todoPriority.class = "priority";
+
+  if (date != null) {
+    todoDate.textContent = format(date, "MMMM do, yyyy");
+  }
 
   todoDiv.appendChild(todoTitle);
   todoDiv.appendChild(todoDescription);
   todoDiv.appendChild(todoDate);
+  todoDiv.appendChild(todoPriority);
   domCache.todoContainer.appendChild(todoDiv);
 }
 
