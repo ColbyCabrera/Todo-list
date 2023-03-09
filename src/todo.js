@@ -1,7 +1,6 @@
 import { el } from "date-fns/locale";
 import { getFormData, displayProject, getTodoElements } from "./domManip";
 import { getCurrentProject } from "./project";
-// add delete project functionality, update ids when project is deleted
 // add ability to edit todos
 const todo = (titleP, descP, priorityP, dueDateP, notesP) => {
   let title = titleP;
