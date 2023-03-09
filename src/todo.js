@@ -1,5 +1,5 @@
 import { el } from "date-fns/locale";
-import { getFormData, displayProject } from "./domManip";
+import { getFormData, displayProject, getTodoElements } from "./domManip";
 import { getCurrentProject } from "./project";
 // add id to todos and ability to remove todo from project list
 // add delete project functionality, update ids when project is deleted
@@ -93,24 +93,19 @@ function createTodo(event) {
 
 function deleteTodo(e) {
   const target = e.target;
-  const todoElements = Array.from(target.parentNode.parentNode.children);
-  const index = todoElements.indexOf(target.parentNode);
+  const todoElements = getTodoElements();
+  const todoElement = target.parentNode.parentNode;
+  const index = todoElements.indexOf(todoElement);
   const todoList = getCurrentProject().getTodos();
-  const todo = todoList[index];
-
-  if (todo.getPriority() === "high") {
-    todo.setPriority("low");
-    target.style.backgroundColor = "#ddd";
-  } else {
-    todo.setPriority("high");
-    target.style.backgroundColor = "red";
-  }
+  todoList.splice(index, 1);
+  displayProject(getCurrentProject());
 }
 
 function changePriority(e) {
   const target = e.target;
-  const todoElements = Array.from(target.parentNode.parentNode.children);
-  const index = todoElements.indexOf(target.parentNode);
+  const todoElements = getTodoElements();
+  const todoElement = target.parentNode.parentNode;
+  const index = todoElements.indexOf(todoElement);
   const todoList = getCurrentProject().getTodos();
   const todo = todoList[index];
 
@@ -123,4 +118,4 @@ function changePriority(e) {
   }
 }
 
-export { todo, createTodo, changePriority };
+export { todo, createTodo, changePriority, deleteTodo };

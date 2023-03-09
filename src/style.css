@@ -68,4 +68,16 @@ form li {
 .priority {
   height: 10px;
   background-color: #ddd;
+  width: 75%;
+  align-self: center;
+}
+
+#todos div div {
+  display: flex;
+  max-width: 75%;
+  min-width: 10rem;
+}
+
+#todos .delete {
+  height: 35px;
 }

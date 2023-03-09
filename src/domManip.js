@@ -1,13 +1,14 @@
 export {
   domCache,
   getFormData,
+  getTodoElements,
   displayTodo,
   displayProject,
   displayProjectList,
   init,
 };
 import { getProjectList, selectProject, createDefaultProject } from "./project";
-import { changePriority, todo } from "./todo";
+import { changePriority, deleteTodo, todo } from "./todo";
 import format from "date-fns/format";
 
 const domCache = {
@@ -28,18 +29,27 @@ function getFormData() {
   return { title, date, desc, projectName };
 }
 
+function getTodoElements() {
+  return Array.from(domCache.todoContainer.children);
+}
+
 function displayTodo(todo) {
   const date = todo.getDueDate();
   const todoDiv = document.createElement("div");
   const todoTitle = document.createElement("h3");
   const todoDescription = document.createElement("p");
   const todoDate = document.createElement("p");
+  const todoBottom = document.createElement("div");
   const todoPriority = document.createElement("div");
+  const todoDelete = document.createElement("img");
 
   todoTitle.textContent = todo.getTitle();
   todoDescription.textContent = todo.getDesc();
   todoPriority.classList.add("priority");
   todoPriority.addEventListener('click', changePriority);
+  todoDelete.addEventListener('click', deleteTodo);
+  todoDelete.classList.add("delete");
+  todoDelete.src = "../images/trashcan.png";
 
   if (date != null) {
     todoDate.textContent = format(date, "MMMM do, yyyy");
@@ -54,7 +64,9 @@ function displayTodo(todo) {
   todoDiv.appendChild(todoTitle);
   todoDiv.appendChild(todoDescription);
   todoDiv.appendChild(todoDate);
-  todoDiv.appendChild(todoPriority);
+  todoDiv.appendChild(todoBottom);
+  todoBottom.appendChild(todoPriority);
+  todoBottom.appendChild(todoDelete);
   domCache.todoContainer.appendChild(todoDiv);
 }
 
