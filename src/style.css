@@ -11,7 +11,8 @@ html {
 
 body {
   display: flex;
-  padding: 1.4rem
+  padding: 1.4rem;
+  height: 100vh;
 }
 
 p {
@@ -80,4 +81,19 @@ form li {
 
 #todos .delete {
   height: 35px;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+}
+
+.projects {
+  margin: 1rem;
+}
+
+#delete-project {
+  margin-top: auto;
+  width: fit-content;
+  align-self: flex-start;
 }

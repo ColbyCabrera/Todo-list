@@ -1,6 +1,6 @@
 import './style.css';
 import { createTodo, todo } from "./todo";
-import { createProject } from "./project"
+import { createProject, deleteProject } from "./project"
 import { init } from './domManip';
 
 //https://www.velotio.com/engineering-blog/design-patterns-in-es6
@@ -18,7 +18,9 @@ import { init } from './domManip';
 
 const newTodoBtn = document.getElementById("todo-submit");
 const newProjectBtn = document.getElementById("project-submit");
+const deleteProjectBtn = document.getElementById("delete-project");
 init();
 
 newTodoBtn.addEventListener('click', createTodo);
 newProjectBtn.addEventListener('click', createProject);
+deleteProjectBtn.addEventListener('click', deleteProject);

@@ -53,6 +53,17 @@ function createProject(event) {
   }
 }
 
+function deleteProject(e) {
+  const projectList = getProjectList()
+  const index = projectList.indexOf(getCurrentProject());
+  if (index > 0) {
+    projectList.splice(index, 1);
+    setCurrentProject(projectList[index - 1]);
+    displayProjectList();
+    displayProject(getCurrentProject());
+  }
+}
+
 function selectProject(e) {
   const projects = getProjectList();
   const selectedProject = projects[e.target.id];
@@ -69,6 +80,7 @@ function createDefaultProject() {
 export {
   project,
   createProject,
+  deleteProject,
   getCurrentProject,
   setCurrentProject,
   selectProject,
