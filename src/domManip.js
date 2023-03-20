@@ -8,13 +8,18 @@ export {
   init,
 };
 import { getProjectList, selectProject, createDefaultProject } from "./project";
-import { changePriority, deleteTodo, editTodo,todo } from "./todo";
+import { changePriority, deleteTodo, editTodo, todo } from "./todo";
 import format from "date-fns/format";
 
 const domCache = {
+  createTodo: document.getElementById("create"),
+  editTodo: document.getElementById("edit"),
   todoTitle: document.getElementById("todo-title"),
   todoDescription: document.getElementById("todo-description"),
   todoDate: document.getElementById("todo-date"),
+  editTitle: document.getElementById("edit-title"),
+  editDescription: document.getElementById("edit-description"),
+  editDate: document.getElementById("edit-date"),
   todoContainer: document.getElementById("todos"),
   projectName: document.getElementById("project-title"),
   currentProject: document.getElementById("current-project"),
@@ -22,10 +27,21 @@ const domCache = {
 };
 
 function getFormData() {
-  const title = domCache.todoTitle.value;
-  const desc = domCache.todoDescription.value;
-  const date = domCache.todoDate.value;
-  const projectName = domCache.projectName.value;
+
+  let title, desc, date, projectName;
+
+  if (domCache.editTodo.classList.contains("hide")) {
+    title = domCache.todoTitle.value;
+    desc = domCache.todoDescription.value;
+    date = domCache.todoDate.value;
+    projectName = domCache.projectName.value;
+  } else {
+    title = domCache.editTitle.value;
+    desc = domCache.editDescription.value;
+    date = domCache.editDate.value;
+    projectName = domCache.projectName.value;
+  }
+
   return { title, date, desc, projectName };
 }
 
@@ -48,9 +64,9 @@ function displayTodo(todo) {
   todoTitle.textContent = todo.getTitle();
   todoDescription.textContent = todo.getDesc();
   todoPriority.classList.add("priority");
-  todoPriority.addEventListener('click', changePriority);
-  todoEdit.addEventListener('click', editTodo);
-  todoDelete.addEventListener('click', deleteTodo);
+  todoPriority.addEventListener("click", changePriority);
+  todoEdit.addEventListener("click", editTodo);
+  todoDelete.addEventListener("click", deleteTodo);
   todoEdit.classList.add("edit");
   todoEdit.src = "../images/edit.png";
   todoDelete.classList.add("delete");
@@ -63,7 +79,7 @@ function displayTodo(todo) {
   if (todo.getPriority() === "high") {
     todoPriority.style.backgroundColor = "red";
   } else {
-    todoPriority.style.backgroundColor = "#ddd"
+    todoPriority.style.backgroundColor = "#ddd";
   }
 
   todoTop.appendChild(todoTitle);

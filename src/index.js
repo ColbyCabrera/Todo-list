@@ -1,5 +1,5 @@
 import './style.css';
-import { createTodo, todo } from "./todo";
+import { createTodo, editTodo, todo } from "./todo";
 import { createProject, deleteProject } from "./project"
 import { init } from './domManip';
 
@@ -17,10 +17,12 @@ import { init } from './domManip';
 // when a project is created display only todos in that project (empty anyways)
 
 const newTodoBtn = document.getElementById("todo-submit");
+const editTodoBtn = document.getElementById("edit-submit");
 const newProjectBtn = document.getElementById("project-submit");
 const deleteProjectBtn = document.getElementById("delete-project");
 init();
 
 newTodoBtn.addEventListener('click', createTodo);
+editTodoBtn.addEventListener('click', editTodo);
 newProjectBtn.addEventListener('click', createProject);
 deleteProjectBtn.addEventListener('click', deleteProject);

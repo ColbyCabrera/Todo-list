@@ -24,7 +24,7 @@
           </div>
         </form>
 
-        <form class="create-todo">
+        <form class="create-todo" id="create">
           <ul>
             <li>
               <h3>New todo</h3>
@@ -51,6 +51,33 @@
           </div>
         </form>
       </div>
+
+      <form class="edit-todo hide" id="edit">
+        <ul>
+          <li>
+            <h3>Edit todo</h3>
+          </li>
+          <li>
+            <label for="edit-title">Title</label>
+            <input required type="text" id="edit-title" />
+          </li>
+          <li>
+            <label for="edit-description">Description</label>
+
+            <textarea
+              id="edit-description"
+              name="edit-description"
+            ></textarea>
+          </li>
+          <li>
+            <label for="edit-date">Date</label>
+            <input type="date" id="edit-date" />
+          </li>
+        </ul>
+        <div class="buttons">
+          <button type="submit" id="edit-submit">Edit Todo</button>
+        </div>
+      </form>
 
       <div class="projects" id="projects"></div>
       <button id="delete-project">Delete current project</button>
