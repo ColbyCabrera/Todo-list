@@ -8,7 +8,7 @@ export {
   init,
 };
 import { getProjectList, selectProject, createDefaultProject } from "./project";
-import { changePriority, deleteTodo, todo } from "./todo";
+import { changePriority, deleteTodo, editTodo,todo } from "./todo";
 import format from "date-fns/format";
 
 const domCache = {
@@ -39,15 +39,20 @@ function displayTodo(todo) {
   const todoTitle = document.createElement("h3");
   const todoDescription = document.createElement("p");
   const todoDate = document.createElement("p");
+  const todoTop = document.createElement("div");
   const todoBottom = document.createElement("div");
   const todoPriority = document.createElement("div");
+  const todoEdit = document.createElement("img");
   const todoDelete = document.createElement("img");
 
   todoTitle.textContent = todo.getTitle();
   todoDescription.textContent = todo.getDesc();
   todoPriority.classList.add("priority");
   todoPriority.addEventListener('click', changePriority);
+  todoEdit.addEventListener('click', editTodo);
   todoDelete.addEventListener('click', deleteTodo);
+  todoEdit.classList.add("edit");
+  todoEdit.src = "../images/edit.png";
   todoDelete.classList.add("delete");
   todoDelete.src = "../images/trashcan.png";
 
@@ -61,7 +66,9 @@ function displayTodo(todo) {
     todoPriority.style.backgroundColor = "#ddd"
   }
 
-  todoDiv.appendChild(todoTitle);
+  todoTop.appendChild(todoTitle);
+  todoTop.appendChild(todoEdit);
+  todoDiv.appendChild(todoTop);
   todoDiv.appendChild(todoDescription);
   todoDiv.appendChild(todoDate);
   todoDiv.appendChild(todoBottom);

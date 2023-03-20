@@ -62,7 +62,7 @@ form li {
 
 #todos {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 1.4rem;
 }
 
@@ -82,6 +82,36 @@ form li {
   display: flex;
   max-width: 75%;
   min-width: 10rem;
+}
+
+#todos > div {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+
+#todos div h3 {
+  display: flex;
+  width: 75%;
+  min-width: 10rem;
+  overflow: hidden;
+  font-size: 2.4rem;
+}
+
+#todos .edit {
+  height: 35px;
+  transition: all 0.1s;
+  justify-self: flex-end;
+}
+
+#todos .edit:hover {
+  transform: scale(1.05);
+}
+
+#todos p {
+  max-width: 75%;
+  overflow: hidden;
 }
 
 #todos .delete {

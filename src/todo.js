@@ -99,6 +99,14 @@ function deleteTodo(e) {
   displayProject(getCurrentProject());
 }
 
+function editTodo(e) {
+  const target = e.target;
+  const todoElements = getTodoElements();
+  const todoElement = target.parentNode.parentNode;
+  const index = todoElements.indexOf(todoElement);
+  const todoList = getCurrentProject().getTodos();
+}
+
 function changePriority(e) {
   const target = e.target;
   const todoElements = getTodoElements();
@@ -116,4 +124,4 @@ function changePriority(e) {
   }
 }
 
-export { todo, createTodo, changePriority, deleteTodo };
+export { todo, createTodo, changePriority, deleteTodo, editTodo };
