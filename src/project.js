@@ -1,4 +1,9 @@
-import { getFormData, displayProject, displayProjectList } from "./domManip";
+import {
+  getFormData,
+  displayProject,
+  displayProjectList,
+  storeProject,
+} from "./domManip";
 
 const projectList = [];
 let currentProject;
@@ -45,6 +50,7 @@ function createProject(event) {
   if (formData.projectName != "") {
     const newProject = project(formData.projectName);
     addProjectToList(newProject);
+    storeProject(newProject);
     setCurrentProject(newProject);
     displayProject(newProject);
     displayProjectList();
@@ -53,8 +59,16 @@ function createProject(event) {
   }
 }
 
+function loadProject(projectName) {
+  const newProject = project(projectName);
+  addProjectToList(newProject);
+  setCurrentProject(newProject);
+  displayProject(newProject);
+  displayProjectList();
+}
+
 function deleteProject(e) {
-  const projectList = getProjectList()
+  const projectList = getProjectList();
   const index = projectList.indexOf(getCurrentProject());
   if (index > 0) {
     projectList.splice(index, 1);
@@ -86,4 +100,5 @@ export {
   selectProject,
   createDefaultProject,
   getProjectList,
+  loadProject,
 };

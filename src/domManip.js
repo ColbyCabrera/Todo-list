@@ -5,10 +5,11 @@ export {
   displayTodo,
   displayProject,
   displayProjectList,
+  storeProject,
   init,
 };
-import { getProjectList, selectProject, createDefaultProject } from "./project";
-import { changePriority, deleteTodo, editTodo, todo } from "./todo";
+import { getProjectList, selectProject, createDefaultProject, createProject, loadProject, getCurrentProject } from "./project";
+import { changePriority, deleteTodo, editTodo, todo, loadTodo } from "./todo";
 import format from "date-fns/format";
 
 const domCache = {
@@ -27,7 +28,6 @@ const domCache = {
 };
 
 function getFormData() {
-
   let title, desc, date, projectName;
 
   if (domCache.editTodo.classList.contains("hide")) {
@@ -114,9 +114,79 @@ function displayProjectList() {
   });
 }
 
+function storeProject(project) {
+  let projectList = [];
+  let todos = [];
+  getProjectList().forEach(project => {
+    projectList.push(project.getProjectName());
+  });
+
+  project.getTodos().forEach(todo => {
+    const todoObj = {
+      title: todo.getTitle(),
+      desc: todo.getDesc(),
+      dueDate: todo.getDueDate(),
+      priority: todo.getPriority(),
+      notes: todo.getNotes(),
+    }
+    console.log(todoObj.dueDate);
+    todos.push(todoObj);
+  });
+
+  localStorage.setItem("projectList", JSON.stringify(projectList));
+  localStorage.setItem("projectName", project.getProjectName());
+  localStorage.setItem(project.getProjectName() + "Todos", JSON.stringify(todos));
+}
+
 function init() {
-  createDefaultProject();
+  if (storageAvailable("localStorage")) {
+    const projectList = JSON.parse(localStorage.getItem("projectList"));
+
+    if (projectList != null) {
+      projectList.forEach(projectName => {
+        const projectTodos =  JSON.parse(localStorage.getItem(projectName + "Todos"));
+        loadProject(projectName);
+        if (projectTodos != null) {
+          projectTodos.forEach(todo => {
+            loadTodo(todo);
+          });
+        }
+      });
+    } else {
+      createDefaultProject();
+    }
+  } else {
+    createDefaultProject();
+  }
+
   const projects = getProjectList();
   displayProject(projects[0]);
   displayProjectList();
+}
+
+function storageAvailable(type) {
+  let storage;
+  try {
+    storage = window[type];
+    const x = "__storage_test__";
+    storage.setItem(x, x);
+    storage.removeItem(x);
+    return true;
+  } catch (e) {
+    return (
+      e instanceof DOMException &&
+      // everything except Firefox
+      (e.code === 22 ||
+        // Firefox
+        e.code === 1014 ||
+        // test name field too, because code might not be present
+        // everything except Firefox
+        e.name === "QuotaExceededError" ||
+        // Firefox
+        e.name === "NS_ERROR_DOM_QUOTA_REACHED") &&
+      // acknowledge QuotaExceededError only if there's something already stored
+      storage &&
+      storage.length !== 0
+    );
+  }
 }

@@ -3,6 +3,7 @@ import {
   displayProject,
   getTodoElements,
   domCache,
+  storeProject,
 } from "./domManip";
 import { getCurrentProject } from "./project";
 
@@ -97,13 +98,28 @@ function createTodo(e) {
       "notes"
     );
     currentProject.addTodo(newTodo);
+    storeProject(currentProject);
     displayProject(currentProject);
   } else {
     alert("Title is required");
   }
 }
 
+function loadTodo(todoObj) {
+  const currentProject = getCurrentProject();
+  const newTodo = todo(
+    todoObj.title,
+    todoObj.desc,
+    todoObj.priority,
+    new Date(todoObj.dueDate).toDateString(),
+    "notes"
+  );
+  currentProject.addTodo(newTodo);
+  displayProject(currentProject);
+}
+
 function deleteTodo(e) {
+  const currentProject = getCurrentProject();
   const target = e.target;
   const todoElements = getTodoElements();
   const todoElement = target.parentNode.parentNode;
@@ -116,8 +132,8 @@ function deleteTodo(e) {
     domCache.createTodo.classList.toggle("hide");
     domCache.editTodo.classList.toggle("hide");
   }
-
-  displayProject(getCurrentProject());
+  storeProject(currentProject);
+  displayProject(currentProject);
 }
 
 function editTodo(e) {
@@ -135,6 +151,7 @@ function editTodo(e) {
     todoList[index].setDueDate(formData.date);
     domCache.createTodo.classList.toggle("hide");
     domCache.editTodo.classList.toggle("hide");
+    storeProject(currentProject);
     displayProject(currentProject);
   } else {
     const todoElement = target.parentNode.parentNode;
@@ -145,11 +162,12 @@ function editTodo(e) {
 }
 
 function changePriority(e) {
+  const currentProject = getCurrentProject();
   const target = e.target;
   const todoElements = getTodoElements();
   const todoElement = target.parentNode.parentNode;
   const index = todoElements.indexOf(todoElement);
-  const todoList = getCurrentProject().getTodos();
+  const todoList = currentProject.getTodos();
   const todo = todoList[index];
 
   if (todo.getPriority() === "high") {
@@ -159,6 +177,8 @@ function changePriority(e) {
     todo.setPriority("high");
     target.style.backgroundColor = "red";
   }
+
+  storeProject(currentProject);
 }
 
-export { todo, createTodo, changePriority, deleteTodo, editTodo };
+export { todo, createTodo, changePriority, deleteTodo, editTodo, loadTodo };
