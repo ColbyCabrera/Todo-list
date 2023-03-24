@@ -8,7 +8,14 @@ export {
   storeProject,
   init,
 };
-import { getProjectList, selectProject, createDefaultProject, createProject, loadProject, getCurrentProject } from "./project";
+import {
+  getProjectList,
+  selectProject,
+  createDefaultProject,
+  createProject,
+  loadProject,
+  getCurrentProject,
+} from "./project";
 import { changePriority, deleteTodo, editTodo, todo, loadTodo } from "./todo";
 import format from "date-fns/format";
 
@@ -117,25 +124,26 @@ function displayProjectList() {
 function storeProject(project) {
   let projectList = [];
   let todos = [];
-  getProjectList().forEach(project => {
+  getProjectList().forEach((project) => {
     projectList.push(project.getProjectName());
   });
 
-  project.getTodos().forEach(todo => {
+  project.getTodos().forEach((todo) => {
     const todoObj = {
       title: todo.getTitle(),
       desc: todo.getDesc(),
       dueDate: todo.getDueDate(),
       priority: todo.getPriority(),
       notes: todo.getNotes(),
-    }
-    console.log(todoObj.dueDate);
+    };
     todos.push(todoObj);
   });
 
   localStorage.setItem("projectList", JSON.stringify(projectList));
-  localStorage.setItem("projectName", project.getProjectName());
-  localStorage.setItem(project.getProjectName() + "Todos", JSON.stringify(todos));
+  localStorage.setItem(
+    project.getProjectName() + "Todos",
+    JSON.stringify(todos)
+  );
 }
 
 function init() {
@@ -143,11 +151,13 @@ function init() {
     const projectList = JSON.parse(localStorage.getItem("projectList"));
 
     if (projectList != null) {
-      projectList.forEach(projectName => {
-        const projectTodos =  JSON.parse(localStorage.getItem(projectName + "Todos"));
+      projectList.forEach((projectName) => {
+        const projectTodos = JSON.parse(
+          localStorage.getItem(projectName + "Todos")
+        );
         loadProject(projectName);
         if (projectTodos != null) {
-          projectTodos.forEach(todo => {
+          projectTodos.forEach((todo) => {
             loadTodo(todo);
           });
         }

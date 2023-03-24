@@ -105,19 +105,6 @@ function createTodo(e) {
   }
 }
 
-function loadTodo(todoObj) {
-  const currentProject = getCurrentProject();
-  const newTodo = todo(
-    todoObj.title,
-    todoObj.desc,
-    todoObj.priority,
-    new Date(todoObj.dueDate).toDateString(),
-    "notes"
-  );
-  currentProject.addTodo(newTodo);
-  displayProject(currentProject);
-}
-
 function deleteTodo(e) {
   const currentProject = getCurrentProject();
   const target = e.target;
@@ -179,6 +166,19 @@ function changePriority(e) {
   }
 
   storeProject(currentProject);
+}
+
+function loadTodo(todoObj) {
+  const currentProject = getCurrentProject();
+  const newTodo = todo(
+    todoObj.title,
+    todoObj.desc,
+    todoObj.priority,
+    new Date(todoObj.dueDate).toDateString(),
+    "notes"
+  );
+  currentProject.addTodo(newTodo);
+  displayProject(currentProject);
 }
 
 export { todo, createTodo, changePriority, deleteTodo, editTodo, loadTodo };

@@ -59,14 +59,6 @@ function createProject(event) {
   }
 }
 
-function loadProject(projectName) {
-  const newProject = project(projectName);
-  addProjectToList(newProject);
-  setCurrentProject(newProject);
-  displayProject(newProject);
-  displayProjectList();
-}
-
 function deleteProject(e) {
   const projectList = getProjectList();
   const index = projectList.indexOf(getCurrentProject());
@@ -74,6 +66,7 @@ function deleteProject(e) {
     projectList.splice(index, 1);
     setCurrentProject(projectList[index - 1]);
     displayProjectList();
+    storeProject(getCurrentProject());
     displayProject(getCurrentProject());
   }
 }
@@ -89,6 +82,14 @@ function createDefaultProject() {
   const defaultProject = project("Todos");
   addProjectToList(defaultProject);
   setCurrentProject(defaultProject);
+}
+
+function loadProject(projectName) {
+  const newProject = project(projectName);
+  addProjectToList(newProject);
+  setCurrentProject(newProject);
+  displayProject(newProject);
+  displayProjectList();
 }
 
 export {
