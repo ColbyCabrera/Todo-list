@@ -1,0 +1,143 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  list-style: none;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  display: flex;
+  padding: 1.4rem;
+  height: 100vh;
+}
+
+p {
+  font-size: 1.4rem;
+}
+
+label, input, textarea, button {
+  font-size: 2rem;
+}
+
+button {
+  padding: 0.3rem;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 25%;
+  max-width: 20rem;
+}
+
+section {
+  width: 100%;
+}
+
+h2 {
+  text-align: center;
+  font-size: 6rem;
+}
+
+h3 {
+  font-size: 3.2rem;
+}
+
+form {
+  margin: 1rem;
+  margin-bottom: 3rem;
+}
+
+form li {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+  max-width: 18rem;
+}
+
+#todos {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 1.4rem;
+}
+
+.priority {
+  height: 10px;
+  background-color: #ddd;
+  width: 75%;
+  align-self: center;
+  transition: all 0.1s;
+}
+
+.priority:hover {
+  transform: scale(1.05);
+}
+
+#todos div div {
+  display: flex;
+  max-width: 75%;
+  min-width: 10rem;
+}
+
+#todos > div {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+
+#todos div h3 {
+  display: flex;
+  width: 75%;
+  min-width: 10rem;
+  overflow: hidden;
+  font-size: 2.4rem;
+}
+
+#todos .edit {
+  height: 35px;
+  transition: all 0.1s;
+  justify-self: flex-end;
+}
+
+#todos .edit:hover {
+  transform: scale(1.05);
+}
+
+#todos p {
+  max-width: 75%;
+  overflow: hidden;
+}
+
+#todos .delete {
+  height: 35px;
+  transition: all 0.1s;
+}
+
+#todos .delete:hover {
+  transform: scale(1.05);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+}
+
+.projects {
+  margin: 1rem;
+}
+
+#delete-project {
+  margin-top: auto;
+  width: fit-content;
+  align-self: flex-start;
+}
+
+.hide {
+  display: none;
+}
