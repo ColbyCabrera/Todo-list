@@ -129,17 +129,22 @@ function editTodo(e) {
   const currentProject = getCurrentProject();
   if (e.target.parentNode.parentNode === domCache.editTodo) {
     const formData = getFormData();
-    const todoElements = getTodoElements();
-    const todoElement = getCurrentEdit();
-    const index = todoElements.indexOf(todoElement);
-    const todoList = currentProject.getTodos();
-    todoList[index].setTitle(formData.title);
-    todoList[index].setDesc(formData.desc);
-    todoList[index].setDueDate(formData.date);
-    domCache.createTodo.classList.toggle("hide");
-    domCache.editTodo.classList.toggle("hide");
-    storeProject(currentProject);
-    displayProject(currentProject);
+
+    if (formData.title != "") {
+      const todoElements = getTodoElements();
+      const todoElement = getCurrentEdit();
+      const index = todoElements.indexOf(todoElement);
+      const todoList = currentProject.getTodos();
+      todoList[index].setTitle(formData.title);
+      todoList[index].setDesc(formData.desc);
+      todoList[index].setDueDate(formData.date);
+      domCache.createTodo.classList.toggle("hide");
+      domCache.editTodo.classList.toggle("hide");
+      storeProject(currentProject);
+      displayProject(currentProject);
+    } else {
+      alert("Title is required");
+    }
   } else {
     const todoElement = target.parentNode.parentNode;
     setCurrentEdit(todoElement);

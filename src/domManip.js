@@ -15,6 +15,7 @@ import {
   createProject,
   loadProject,
   getCurrentProject,
+  setCurrentProject,
 } from "./project";
 import { changePriority, deleteTodo, editTodo, todo, loadTodo } from "./todo";
 import format from "date-fns/format";
@@ -170,6 +171,7 @@ function init() {
   }
 
   const projects = getProjectList();
+  setCurrentProject(projects[0]);
   displayProject(projects[0]);
   displayProjectList();
 }
